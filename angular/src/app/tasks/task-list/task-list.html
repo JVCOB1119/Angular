@@ -1,0 +1,67 @@
+<div class="task-list">
+  <h2>Lista zadań</h2>
+
+  <div class="filters">
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="filterStatus">
+        <mat-option value="">Wszystkie</mat-option>
+        <mat-option value="todo">Do zrobienia</mat-option>
+        <mat-option value="in_progress">W trakcie</mat-option>
+        <mat-option value="done">Zakończone</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Priorytet</mat-label>
+      <mat-select [(ngModel)]="filterPriority">
+        <mat-option value="">Wszystkie</mat-option>
+        <mat-option value="low">Niski</mat-option>
+        <mat-option value="medium">Średni</mat-option>
+        <mat-option value="high">Wysoki</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Sortuj po</mat-label>
+      <mat-select [(ngModel)]="sortBy">
+        <mat-option value="dueDate">Termin</mat-option>
+        <mat-option value="priority">Priorytet</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Kierunek</mat-label>
+      <mat-select [(ngModel)]="sortDirection">
+        <mat-option value="asc">Rosnąco</mat-option>
+        <mat-option value="desc">Malejąco</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <ul>
+    <li *ngFor="let task of filteredAndSortedTasks()">
+      <strong>{{ task.title }}</strong>
+      – {{ getStatusLabel(task.status) }}
+      (do: {{ task.dueDate | date:'yyyy-MM-dd' }}, priorytet: {{ getPriorityLabel(task.priority) }})
+
+      <span
+        class="action-link"
+        *ngIf="isOwnerOrAdmin(task)"
+        (click)="editTask(task.id)"
+      >Edytuj</span>
+
+      <span
+        class="action-link delete"
+        *ngIf="isOwnerOrAdmin(task)"
+        (click)="deleteTask(task.id)"
+      >Usuń</span>
+
+      <span
+        class="action-link done"
+        *ngIf="task.status !== 'done' && isOwnerOrAdmin(task)"
+        (click)="markAsDone(task)"
+      >Oznacz jako wykonane</span>
+    </li>
+  </ul>
+</div>

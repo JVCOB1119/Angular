@@ -1,0 +1,49 @@
+<mat-card class="task-card">
+  <mat-card-title class="center-title">Dodaj nowe zadanie</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tytuł zadania</mat-label>
+        <input matInput formControlName="title">
+        <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+          Tytuł jest wymagany
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Opis</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Priorytet</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option value="low">Niski</mat-option>
+          <mat-option value="medium">Średni</mat-option>
+          <mat-option value="high">Wysoki</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="todo">Do zrobienia</mat-option>
+          <mat-option value="in_progress">W trakcie</mat-option>
+          <mat-option value="done">Zakończone</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Termin</mat-label>
+        <input matInput type="date" formControlName="dueDate">
+        <mat-error *ngIf="taskForm.get('dueDate')?.hasError('required')">
+          Termin jest wymagany
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
+        Dodaj zadanie
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

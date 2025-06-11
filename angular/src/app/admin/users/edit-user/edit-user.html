@@ -1,0 +1,30 @@
+<div class="edit-user-container">
+  <h2 class="edit-user-title">Edycja użytkownika</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        Podaj poprawny email
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Nazwa użytkownika</mat-label>
+      <input matInput formControlName="username" />
+      <mat-error *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+        Podaj nazwę użytkownika
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Rola</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="user">Użytkownik</mat-option>
+        <mat-option value="admin">Administrator</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Zapisz</button>
+  </form>
+</div>

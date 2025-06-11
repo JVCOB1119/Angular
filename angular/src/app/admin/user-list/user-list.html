@@ -1,0 +1,24 @@
+<h2 class="centered-title">Użytkownicy</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nazwa</th>
+      <th>Email</th>
+      <th>Rola</th>
+      <th>Akcje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>
+        <button class="button-edit" [routerLink]="['/admin/users/edit', user.id]">Edytuj</button>
+        <button class="button-delete" (click)="deleteUser(user.id)">Usuń</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

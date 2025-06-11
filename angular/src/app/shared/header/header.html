@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <span>Task Manager</span>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/tasks">Zadania</a>
+  <a mat-button routerLink="/add-task">Dodaj zadanie</a>
+
+  @if (authService.isAdmin()) {
+    <a mat-button routerLink="/admin">Admin</a>
+  }
+
+  @if (!authService.isLoggedIn()) {
+    <a mat-button routerLink="/login">Logowanie</a>
+    <a mat-button routerLink="/register">Rejestracja</a>
+  }
+
+  @if (authService.isLoggedIn()) {
+    <a mat-button (click)="logout()">Wyloguj</a>
+  }
+</mat-toolbar>

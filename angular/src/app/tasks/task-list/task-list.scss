@@ -1,0 +1,32 @@
+.task-list {
+  max-width: 600px;
+  margin: 40px auto;
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+}
+.action-link {
+  color: #1976d2;
+  cursor: pointer;
+  margin-right: 10px;
+  text-decoration: none; // <-- usuwa podkreślenie
+  transition: color 0.2s;
+  font-weight: 500;
+
+  &:hover {
+    color: #125699;
+  }
+  &.delete {
+    color: #d32f2f;
+    &:hover { color: #a31515; }
+  }
+  &.done {
+    color: #388e3c;
+    &:hover { color: #225d24; }
+  }
+}
